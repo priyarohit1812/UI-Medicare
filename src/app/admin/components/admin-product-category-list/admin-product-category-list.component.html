@@ -1,0 +1,51 @@
+
+   <mat-grid-list cols="2">
+    <mat-grid-tile>
+        <div class="app_card_container_productCategory">
+        <mat-card>
+            <mat-card-title>Product Category!</mat-card-title>
+            <mat-card-subtitle>Add new category</mat-card-subtitle>
+            <mat-card-content>
+                <form [formGroup]="productCategoryForm" (ngSubmit)="saveCategory()">
+                    <mat-form-field class="app_form_field">
+                        <mat-label>Category Name</mat-label>
+                        <input matInput type="text" formControlName="categoryName" />
+                        <mat-error *ngIf="productCategoryForm.controls.categoryName.hasError('required')">
+                            Please enter category name.
+                        </mat-error>
+                    </mat-form-field>
+    
+                    <button mat-raised-button type="submit" class="mr-8" color="primary"
+                        [disabled]="productCategoryForm.invalid">Add</button>
+                </form>
+            </mat-card-content>
+        </mat-card></div>
+    </mat-grid-tile>
+
+<mat-grid-tile>
+    <div class="app_card_container_productCategory">
+        <mat-card>
+            <mat-card-title>Product Categories</mat-card-title>
+    
+            <mat-card-content>
+    
+                <input matInput type="search" name="categoryName" [(ngModel)]="categoryName"
+                    (ngModelChange)="SearchCategory()" placeholder="Serach" style="background-color: gray; size: 20%; " />
+    
+                <mat-grid-list cols="4" rowHeight="50px">
+                    <mat-grid-tile>Id</mat-grid-tile>
+                    <mat-grid-tile colspan="3">Categories</mat-grid-tile>
+                    <!-- <mat-grid-tile colspan="2">Actions</mat-grid-tile> -->
+                </mat-grid-list>
+                
+                <ng-container *ngFor="let category of filteredProductCategory_list">
+    
+                    <app-admin-product-category [productCategory]="category"
+                        (deleteProductCategory)="deleteCategory(category.productcategoryId)"></app-admin-product-category>
+    
+                </ng-container>
+               
+            </mat-card-content>
+        </mat-card></div>
+</mat-grid-tile>
+</mat-grid-list>

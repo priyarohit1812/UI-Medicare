@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <mat-icon *ngIf="showDrawer" (click)="sidenav.toggle()">menu</mat-icon>
+    <h1 *ngIf="showDrawer"><a class="nostyle" [href]="home_path">{{title}}</a></h1>
+    <h1 *ngIf="!showDrawer">{{title}}</h1>
+
+    <span *ngIf="showDrawer" class="flex-spacer"></span>
+
+    <mat-form-field class="mr-8" *ngIf="showDrawer && !is_admin" floatLabel="never">
+      <input appearance="standard" matInput type="search" [(ngModel)]="searchValue" placeholder="Search"
+        (keyup)="searchProduct($event)">
+      <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <a class="nostyle" *ngIf="showDrawer && !is_admin" mat-stroked-button href="/user/cart"><mat-icon
+        matBadge={{cart_item_count}}>shopping_cart</mat-icon></a>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container hasBackdrop="false">
+  <mat-sidenav #sidenav mode="side">
+    <mat-nav-list>
+
+      <a *ngIf="is_admin" mat-list-item [routerLink]="'/admin/product-categories'"> Product Category </a>
+      <a *ngIf="is_admin" mat-list-item [routerLink]="'/admin/products'"> Product </a>
+      <a *ngIf="!is_admin" mat-list-item [routerLink]="'/user/profile/PROFILE'"><mat-icon>account_circle</mat-icon>
+        Profile </a>      
+      <form [formGroup]="filterForm">
+        <mat-form-field class="form_select" *ngIf="!is_admin" mat-list-item appearance="fill">
+          <mat-label>Categories</mat-label>
+          <mat-select formControlName="category">
+            <mat-option value="0">All</mat-option>
+            <mat-option *ngFor="let category of category_list" [value]="category.id">{{ category.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form_select" *ngIf="!is_admin" mat-list-item appearance="fill">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="brand">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let brand of brand_list" [value]="brand">{{ brand }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <a mat-list-item (click)="clearSessionData()"> Logout </a>
+      <a mat-list-item (click)="sidenav.close()"> Close </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;" (click)="sidenav.close()">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

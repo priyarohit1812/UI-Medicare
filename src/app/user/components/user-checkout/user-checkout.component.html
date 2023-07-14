@@ -1,0 +1,141 @@
+<div class="app_card_container_productCategory">
+    <mat-card>
+        <mat-card-title></mat-card-title>
+        <mat-card-subtitle>Shipping Address</mat-card-subtitle>
+        <mat-card-content>
+            <form [formGroup]="addressListForm">
+                <mat-radio-group formControlName="selAddress">
+                    <ng-container *ngFor="let address of addressList">
+                        <mat-radio-button [value]="address.addressId"
+                            (change)="addressSelect($event, address.addressId)"></mat-radio-button>
+
+                        <mat-label class="app_form_field">{{address.address1}}, {{address.address2}}</mat-label>
+                        <mat-label class="app_form_field" *ngIf="address.address3">{{address.address3}} </mat-label>
+                        <mat-label class="app_form_field"> {{address.city}}, {{address.state}} </mat-label>
+                        <mat-label class="app_form_field">{{address.country}} - {{address.zipCode}}</mat-label>
+
+                    </ng-container>
+                    <ng-container>
+                        <mat-radio-button [value]="0" (change)="addressSelect($event, 0)">
+                            <mat-label>Add New Address</mat-label>
+                        </mat-radio-button>
+
+                    </ng-container>
+                </mat-radio-group>
+            </form>
+
+            <form *ngIf="addNewAddress" [formGroup]="newAddressForm">
+                <mat-form-field class="app_form_field">
+                    <mat-label>Address 1:</mat-label>
+                    <input matInput type="text" placeholder="Address 1" formControlName="add1" />
+                    <mat-error *ngIf="newAddressForm.controls.add1.hasError('required')">
+                        Enter Address
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>Address 2:</mat-label>
+                    <input matInput type="text" placeholder="Address 2" formControlName="add2" />
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>Address 3:</mat-label>
+                    <input matInput type="text" placeholder="Address 3" formControlName="add3" />
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>City:</mat-label>
+                    <input matInput type="text" placeholder="City" formControlName="city" />
+                    <mat-error *ngIf="newAddressForm.controls.city.hasError('required')">
+                        Enter City
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>State:</mat-label>
+                    <input matInput type="text" placeholder="State" formControlName="state" />
+                    <mat-error *ngIf="newAddressForm.controls.state.hasError('required')">
+                        Enter State
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>Country:</mat-label>
+                    <input matInput type="text" placeholder="Country" formControlName="country" />
+                    <mat-error *ngIf="newAddressForm.controls.country.hasError('required')">
+                        Enter Country
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>ZipCode</mat-label>
+                    <input matInput type="text" placeholder="ZipCode" formControlName="zipCode" />
+                    <mat-error *ngIf="newAddressForm.controls.zipCode.hasError('required')">
+                        Enter ZipCode
+                    </mat-error>
+                </mat-form-field>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-title></mat-card-title>
+        <mat-card-subtitle>Payment Options</mat-card-subtitle>
+        <mat-card-content>
+            <form [formGroup]="paymentOptionForm">
+                <mat-radio-group formControlName="payment">
+                    <mat-radio-button [value]="PAYMENT_OPTION_COD">
+                        <mat-label>Payment On Delivery</mat-label>
+                    </mat-radio-button>
+
+                    <mat-radio-button [value]="PAYMENT_OPTION_CARD">
+                        <mat-label>Debit/Credit Card</mat-label>
+                    </mat-radio-button>
+
+                </mat-radio-group>
+            </form>
+
+            <form style="margin: 5px;" *ngIf="selectedPaymentOption == PAYMENT_OPTION_CARD" class="border p-3"
+                [formGroup]="checkoutForm">
+                <mat-form-field class="app_form_field">
+                    <mat-label>Card Number: </mat-label>
+                    <input matInput type="text" placeholder="---- ---- ---- ----" formControlName="cardnumber" />
+                    <mat-error *ngIf="checkoutForm.controls.cardnumber.hasError('required')">
+                        Enter Card Number.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>Expiry: </mat-label>
+                    <input matInput type="text" placeholder="MM/YY" formControlName="expiry" />
+                    <mat-error *ngIf="checkoutForm.controls.expiry.hasError('required')">
+                        Enter expiry date.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>CVV: </mat-label>
+                    <input matInput type="text" placeholder="cvv" formControlName="cvv" />
+                    <mat-error *ngIf="checkoutForm.controls.cvv.hasError('required')">
+                        Enter cvv.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field">
+                    <mat-label>Name: </mat-label>
+                    <input matInput type="text" placeholder="Card holder name" formControlName="name" />
+                    <mat-error *ngIf="checkoutForm.controls.name.hasError('required')">
+                        Enter Name on Card.
+                    </mat-error>
+                </mat-form-field>
+
+
+            </form>
+
+            <button style="margin-left: 40%; margin-top: 10px;" mat-raised-button color="primary"
+                (click)="onCheckOut()">Checkout</button>
+
+        </mat-card-content>
+    </mat-card>
+</div>

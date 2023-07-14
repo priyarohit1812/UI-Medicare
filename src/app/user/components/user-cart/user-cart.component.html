@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-title>Products</mat-card-title>
+
+  <mat-card-content>
+    <mat-grid-list cols="8">
+      <mat-grid-tile>
+        <mat-label>Code</mat-label>
+      </mat-grid-tile>
+      <mat-grid-tile><mat-label>Name</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>Image</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>Brand</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>Discription</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>Seller</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>Price</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>Qty.</mat-label></mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="8" *ngFor="let orderItem of orderItemList;">
+      <mat-grid-tile><mat-label>{{orderItem.product.productCode}}</mat-label></mat-grid-tile>
+      <mat-grid-tile><a style="color: white;"
+            routerLink="/user/home/product-details/{{orderItem.product.productId}}">{{orderItem.product.productName}}</a></mat-grid-tile>
+      <mat-grid-tile><mat-label>
+          <c-carousel [interval]="0" [dark]="true">
+            <c-carousel-indicators></c-carousel-indicators>
+            <c-carousel-inner>
+              <c-carousel-item *ngFor="let image of orderItem.product.images">
+                <img [attr.width]="'150px'" [attr.height]="'150px'" [src]="image.image_url" class="d-block"
+                  loading="lazy" />
+              </c-carousel-item>
+            </c-carousel-inner>
+            <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+            <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+          </c-carousel>
+        </mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>{{orderItem.product.brand}}</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>{{orderItem.product.discription}}</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>{{orderItem.product.seller}}</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label>&#8377;{{orderItem.product.price}}</mat-label></mat-grid-tile>
+      <mat-grid-tile><mat-label><input style="width: 40px;" type="number" [value]="orderItem.quantity"
+            (change)="onQuantityChange(orderItem.product.productId, $event)" /></mat-label>
+        <a href="javascript:void(0);"
+          (click)="removeProduct(orderItem.product.productId, 0)"><mat-icon>delete</mat-icon></a></mat-grid-tile>
+
+    </mat-grid-list>
+    <p *ngIf="cart">
+      <mat-label style="margin-left: 10%; color: pink; font-size: larger;">No of Items: {{cart.noOfItems}}</mat-label>
+      <mat-label style="margin-left: 60%; color: pink; font-size: larger;">Total Price:
+        &#8377;{{cart.totalCartPrice}}</mat-label>
+    </p>
+
+    <button style="margin-left: 40%;" mat-raised-button color="primary" routerLink="/user/checkout">Proceed
+      To Checkout</button>
+
+  </mat-card-content>
+
+</mat-card>

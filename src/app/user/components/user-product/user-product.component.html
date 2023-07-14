@@ -1,0 +1,40 @@
+<mat-card class="user_card">
+
+    <mat-card-content>
+        <mat-grid-list *ngIf="product" class="app_card_container" cols="2" rowHeight="500px">
+
+            <mat-card-title style="text-align: center;">{{ product.productName }}</mat-card-title>
+            <mat-card-subtitle style="text-align: center;">{{ product.brand }}</mat-card-subtitle>
+            <mat-grid-tile>                
+                <c-carousel [interval]="0" [dark]="true">
+                    <c-carousel-indicators></c-carousel-indicators>
+                    <c-carousel-inner>
+                      <c-carousel-item *ngFor="let image of product.images">
+                        <img
+                          [src]="image.image_url"
+                          class="d-block"
+                          loading="lazy"
+                        />
+                      </c-carousel-item>
+                    </c-carousel-inner>
+                    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+                    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+                  </c-carousel>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-label>
+                    <p>Discription: {{ product.discription }} </p>
+                    <p>Mfg Date: {{ product.mfgDate | date:'medium'}}</p>
+                    <p>Exp Date: {{ product.expDate | date:'medium'}}</p>
+                    <p> Seller: {{ product.seller }}</p>
+                    <p>Price: &#8377;{{ product.price }}</p>
+                    <p><button mat-stroked-button style="background-color: crimson;" (click)="addToCart(product.productId)">Add To
+                        Cart</button></p>
+                </mat-label>
+                
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>

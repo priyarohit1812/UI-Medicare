@@ -1,0 +1,172 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import "../node_modules/@coreui/coreui/scss/coreui";
+
+.errorinfo {
+    color: red;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.btn-success {
+    color: white;
+    background-color: red !important;
+}
+
+.bg-success {
+    color: white !important;
+    background-color: red !important;
+}
+
+.app_form_field {
+    display: block !important;
+    width: 400px;
+    margin: 2px;
+}
+
+.app_form_field.auto {
+    width: auto;
+}
+
+.form_select{
+    display: block !important;
+    width: 90%;
+    margin: 8px;
+}
+
+.app_card_container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+.app_card_container_profile{
+    // min-height: 400px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+.app_card_container_product{
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.app_card_container_productCategory{
+    display: block !important;
+    width: 500px;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+   
+}
+.app_card_container_addProduct{
+    display: block !important;
+    width: 500px;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: 30%;
+    margin-top: 10%;
+}
+
+.app_card_container_order{
+    display: block !important;
+    width: 500px;
+    display: flex;
+    justify-content: left !important;
+    align-items: flex-start !important;
+    
+}
+
+.user_card{
+    height: 90% !important;
+    width: 80%  !important;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+.example-viewport {
+    height: 500px;
+    width: 100%;
+    border: 1px solid rgb(243, 242, 242);
+  }
+  
+
+
+.m-8{
+    margin: 8px !important;
+}
+.ml-8{
+    margin-left: 8px !important;
+}
+.mr-8{
+    margin-right: 8px !important;
+}
+.mt-8{
+    margin-top: 8px !important;
+}
+.mb-8{
+    margin-bottom: 8px !important;
+}
+.mh-8{
+    margin: 0 8px !important;
+}
+.mv-8{
+    margin: 8px 0 !important;
+}
+
+.m-center{
+    margin-top: 5px !important;
+    margin-left: 30% !important;
+    margin-bottom: 5px !important;
+}
+
+.m-pc{
+    margin-left: 30px !important;
+    justify-content: end !important;
+    align-items: end !important;
+    
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.table-grid {
+    width: 100% !important;
+}

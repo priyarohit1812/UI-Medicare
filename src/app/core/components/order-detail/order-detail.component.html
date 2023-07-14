@@ -1,0 +1,79 @@
+<div class="app_card_container_product">
+    <div class="border p-3">
+        <mat-card >
+            <mat-card-subtitle *ngIf="isNewOrder">Order Placed Sucessfully!</mat-card-subtitle>
+            <div class="border p-3">
+                <mat-card-content class="app_card_container_order">
+                    <mat-grid-list cols="2" rowHeight="50px">
+                        <mat-grid-tile>Order Id:</mat-grid-tile>
+                        <mat-grid-tile>{{orderDetails.order.purchaseOrderId}}</mat-grid-tile>
+                        <mat-grid-tile>Order Date:</mat-grid-tile>
+                        <mat-grid-tile>{{orderDetails.order.orderDate | date:'medium'}}</mat-grid-tile>
+                        <mat-grid-tile>No of Items:</mat-grid-tile>
+                        <mat-grid-tile>{{orderDetails.order.cart.noOfItems}}</mat-grid-tile>
+                        <mat-grid-tile>Total Price:</mat-grid-tile>
+                        <mat-grid-tile>&#8377;{{orderDetails.order.cart.totalCartPrice}}</mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card-content>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-subtitle>Order Items</mat-card-subtitle>
+            <div class="border p-3">
+                <mat-card-content>
+                    <mat-grid-list cols="5" rowHeight="50px" *ngFor="let orderItem of orderDetails.orderItems;">
+                        <mat-grid-tile>
+                            {{orderItem.product.productName}}</mat-grid-tile>
+                        <mat-grid-tile>{{orderItem.product.brand}}</mat-grid-tile>
+                        <mat-grid-tile>{{orderItem.product.seller}}</mat-grid-tile>
+                        <mat-grid-tile>&#8377; {{orderItem.product.price}}</mat-grid-tile>
+                        <mat-grid-tile>Qty. {{orderItem.quantity}}</mat-grid-tile>
+
+
+                    </mat-grid-list>
+
+                </mat-card-content>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-subtitle>Shipping Address</mat-card-subtitle>
+            <div class="border p-3">
+                <mat-card-content>
+                    <mat-label class="app_form_field">{{orderDetails.order.address.address1}},
+                        {{orderDetails.order.address.address2}}</mat-label>
+                    <mat-label class="app_form_field"
+                        *ngIf="orderDetails.order.address.address3">{{orderDetails.order.address.address3}}</mat-label>
+                    <mat-label class="app_form_field">{{orderDetails.order.address.city}},
+                        {{orderDetails.order.address.state}}</mat-label>
+                    <mat-label class="app_form_field">{{orderDetails.order.address.country}} -
+                        {{orderDetails.order.address.zipCode}}</mat-label>
+                </mat-card-content>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-subtitle>Payment Information</mat-card-subtitle>
+            <div class="border p-3">
+                <mat-card-content class="app_card_container_order">
+                    <mat-grid-list cols="2" rowHeight="50px">
+                        <mat-grid-tile>Payment Type:</mat-grid-tile>
+                        <mat-grid-tile>{{orderDetails.order.payment.paymentType }}</mat-grid-tile>
+                        <mat-grid-tile>Payment Status:</mat-grid-tile>
+                        <mat-grid-tile>{{orderDetails.order.payment.paymentStatus}}</mat-grid-tile>
+                        <mat-grid-tile>Remark:</mat-grid-tile>
+                        <mat-grid-tile>{{orderDetails.order.payment.remark}}</mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card-content>
+            </div>
+        </mat-card>
+
+    </div>
+
+    <div  *ngIf="!is_admin">
+        <a style="margin-left: 40%;" *ngIf="!isNewOrder" mat-raised-button color="accent" routerLink="/user/profile/ORDER">Back</a>
+        <a style="margin: 15px;" *ngIf="!isNewOrder" mat-raised-button color="primary" routerLink="/user/home">Continue Shopping</a>
+    </div>
+    <a style="margin-left: 40%;" *ngIf="is_admin" mat-raised-button color="accent" routerLink="/admin/home">Back</a>
+</div>

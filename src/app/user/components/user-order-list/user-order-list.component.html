@@ -1,0 +1,37 @@
+<div class="app_card_container_profile">
+    <mat-card class="table-grid">
+        <mat-card-subtitle>Orders</mat-card-subtitle>
+        <mat-card-content>
+           
+            <!-- {{getDataString()}} -->
+            <div class="border p-3">
+                <mat-grid-list cols="9" rowHeight="50px" >
+                    <mat-grid-tile colspan="1">Id</mat-grid-tile>
+                    <mat-grid-tile colspan="2">Date</mat-grid-tile>
+                    <mat-grid-tile colspan="2">Shipping Address</mat-grid-tile>
+                    <mat-grid-tile colspan="1">Quantity</mat-grid-tile>
+                    <mat-grid-tile colspan="1">Price</mat-grid-tile>
+                    <mat-grid-tile colspan="2">Actions</mat-grid-tile>
+                </mat-grid-list>
+
+                <cdk-virtual-scroll-viewport appendOnly itemSize="5" class="example-viewport">
+                <mat-grid-list cols="9" rowHeight="100px" *ngFor="let order of orderList">
+                    <mat-grid-tile colspan="1">{{order.purchaseOrderId}}</mat-grid-tile>
+                    <mat-grid-tile colspan="2">{{order.orderDate | date:'medium'}}</mat-grid-tile>
+                    <mat-grid-tile colspan="2">
+                        <mat-label *ngIf="order.address.address3">{{order.address.address1}}, {{order.address.address2}},
+                            {{order.address.address3}}, {{order.address.city}}, {{order.address.state}},{{order.address.country}} - {{order.address.zipCode}}
+                        </mat-label>
+                        
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1">{{order.cart.noOfItems}}</mat-grid-tile>
+                    <mat-grid-tile colspan="1">&#8377; {{order.cart.totalCartPrice}}</mat-grid-tile>
+                    <mat-grid-tile colspan="2"><a class="m-8" mat-raised-button color="primary" routerLink="/user/order/{{order.purchaseOrderId}}">View</a></mat-grid-tile>
+                </mat-grid-list>
+            </cdk-virtual-scroll-viewport>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>
+               

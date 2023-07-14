@@ -1,0 +1,27 @@
+<div class="app_card_container_profile">
+
+    <mat-card>
+        <a class="m-center" mat-raised-button color="primary" routerLink="/user/address">Add New Address</a>
+        <mat-card-title></mat-card-title>
+        <mat-card-subtitle>Available Address</mat-card-subtitle>
+        <div class="border p-3">
+            <mat-card-content class="m-8">
+
+                <div class="m-8">
+                    <ng-container *ngFor="let address of filtered_addressList ">
+                        <mat-label class="app_form_field">{{address.address1}}, {{address.address2}}</mat-label>
+                        <mat-label class="app_form_field" *ngIf="address.address3">{{address.address3}}</mat-label>
+                        <mat-label class="app_form_field">{{address.city}}, {{address.state}}</mat-label>
+                        <mat-label class="app_form_field">{{address.country}} - {{address.zipCode}}</mat-label>
+
+                        <a class="m-8" mat-raised-button color="primary"
+                            routerLink="/user/address/{{address.addressId}}">Edit</a>
+                        <a class="m-8" mat-raised-button color="warn" href="javascript:void(0);"
+                            (click)="deleteAddress(address.addressId)">Delete</a>
+
+                    </ng-container>
+                </div>
+            </mat-card-content>
+        </div>
+    </mat-card>
+</div>

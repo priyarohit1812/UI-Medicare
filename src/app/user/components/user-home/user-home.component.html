@@ -1,0 +1,41 @@
+<mat-grid-list class="app_card_container" cols="4" rowHeight="500px" >
+  <mat-grid-tile *ngFor="let product of product_list">
+    <mat-card class="user_card">
+
+      <mat-card-title>{{ product.productName }}</mat-card-title>
+      <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
+      <mat-card-content>
+
+
+        <c-carousel [interval]="0" [dark]="true" style="margin-left: 10%;">
+          <c-carousel-indicators></c-carousel-indicators>
+          <c-carousel-inner>
+            <c-carousel-item *ngFor="let image of product.images">
+              <img [attr.width]="'200px'" [attr.height]="'150px'" [src]="image.image_url" class="d-block"
+                loading="lazy" />
+            </c-carousel-item>
+          </c-carousel-inner>
+          <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+          <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+        </c-carousel>
+        <div class="m-8">
+
+          <a style="color: lightsteelblue; text-decoration: none;"
+            routerLink="/user/home/product-details/{{ product.productId }}">
+            <mat-label><span style="color: aliceblue;"> Description:</span> {{ product.discription }}</mat-label>
+            <mat-label class="app_form_field"><span style="color: aliceblue;">Mfg Date: </span>{{ product.mfgDate  | date: 'dd/MM/yyyy'
+              }}</mat-label>
+            <mat-label class="app_form_field"><span style="color: aliceblue;">Exp Date: </span>{{ product.expDate  | date: 'dd/MM/yyyy'
+              }}</mat-label>
+            <mat-label class="app_form_field"><span style="color: aliceblue;">Seller: </span>{{ product.seller
+              }}</mat-label>
+            <mat-label class="app_form_field"><span style="color: aliceblue;">Price: &#8377;{{ product.price
+                }}</span></mat-label>
+          </a>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>

@@ -1,0 +1,75 @@
+<!-- <div class="container-fluid " style="margin-top: 50px;">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <b>Login Here</b>
+                </div>
+                <div class="card-body">
+
+                    <form [formGroup]="loginFrom" (ngSubmit)="login()">
+                        <label>Username</label>
+                        <input type="username" formControlName="username" class="form-control" />
+                        <span class="errorinfo"
+                            *ngIf="loginFrom.controls.username.touched && loginFrom.controls.username.invalid">
+                            <b>Please enter username</b>
+                        </span>
+                        <br />
+
+                        <label>Password</label>
+                        <input type="password" formControlName="password" class="form-control" />
+                        <span class="errorinfo"
+                            *ngIf="loginFrom.controls.password.touched && loginFrom.controls.password.invalid">
+                            <b>Please enter password</b>
+                        </span>
+
+                        <br />
+                        <input type="submit" value="Login" class="btn btn-success" [disabled]="loginFrom.invalid" />
+                        &nbsp;&nbsp;&nbsp;
+                        <a routerLink="/user/register" class="btn btn-seconery">Register</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a routerLink="/admin/login" class="btn btn-warning">Admin Login</a>   
+                         
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+<div class="app_card_container">
+    <mat-card>
+        <mat-card-title>Login!</mat-card-title>
+        <mat-card-subtitle>User Login</mat-card-subtitle>
+        <mat-card-content>
+            <form [formGroup]="loginFrom" (ngSubmit)="login()">
+                <mat-form-field class="app_form_field">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="username" />
+                    <mat-error *ngIf="loginFrom.controls.username.hasError('required')">
+                        Please enter email
+                    </mat-error>
+                    <mat-error *ngIf="loginFrom.controls.username.hasError('email')">
+                        Please enter a valid email
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="app_form_field">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" />
+                    <mat-error *ngIf="loginFrom.controls.password.hasError('required')">
+                        Please enter password
+                    </mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field> -->
+                <button mat-raised-button type="submit" class="mr-8" color="primary"
+                    [disabled]="loginFrom.invalid">Login</button>
+                    <mat-label> {{msg}}</mat-label>
+                <a mat-raised-button color="accent" class="mr-8" routerLink="/user/register">Register</a>
+                <a mat-raised-button color="accent" routerLink="/admin/login">Admin Login</a>
+                <!-- </mat-form-field> -->
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

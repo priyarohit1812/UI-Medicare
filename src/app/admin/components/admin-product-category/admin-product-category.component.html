@@ -1,0 +1,37 @@
+<mat-card>
+
+    <mat-card-content>
+       
+        <mat-grid-list cols="4" rowHeight="50px">
+
+            <mat-grid-tile>
+                <mat-label>{{ productCategory.productcategoryId }}</mat-label>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile colspan="3">
+                <form [formGroup]="productCategoryUpdateForm">
+
+                   <input style="width: 100px;" *ngIf="enableEdit" matInput type="text" formControlName="categoryName" />
+                            
+                       
+                            <mat-label *ngIf="!enableEdit">{{ productCategory.categoryName }}</mat-label>
+                        
+                            <button mat-raised-button class="m-pc" color="accent" *ngIf="!enableEdit"
+                                (click)="editCategory()">Edit</button>
+                            <button mat-raised-button class="m-pc" color="warn" *ngIf="!enableEdit"
+                                (click)="deleteCategory()">Delete</button>
+                       
+                            <button mat-raised-button class="m-pc" color="accent" *ngIf="enableEdit"
+                                (click)="saveCategory()">save</button>
+                            <button mat-raised-button class="m-pc" color="warn" *ngIf="enableEdit"
+                                (click)="cancelCategory()">Cancle</button>
+                      
+                </form>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    
+    </mat-card-content>
+
+</mat-card>

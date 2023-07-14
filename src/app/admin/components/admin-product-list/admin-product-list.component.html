@@ -1,0 +1,72 @@
+<div class="app_card_container_product">
+    <mat-card>
+
+        <mat-card-content>
+            <a mat-raised-button color="primary" routerLink="/admin/product">Add Product</a>
+            <div class="app_card_container_product">
+                <mat-card>
+                    <mat-card-title>Products </mat-card-title>
+
+                    <mat-card-content>
+
+                        <input matInput type="text" [(ngModel)]="productName" name="productName"
+                            (ngModelChange)="SearchProducts()" placeholder="Serach"
+                            style="background-color: gray; width: 20%;" />
+
+                        <mat-grid-list cols="14">
+                            <mat-grid-tile>Code</mat-grid-tile>
+                            <mat-grid-tile>Category</mat-grid-tile>
+                            <mat-grid-tile>Name</mat-grid-tile>
+                            <mat-grid-tile colspan="2">Image</mat-grid-tile>
+                            <mat-grid-tile colspan="2">Brand</mat-grid-tile>
+                            <mat-grid-tile colspan="2">MfgDate |
+                                ExpDate</mat-grid-tile>
+                            <mat-grid-tile>Seller</mat-grid-tile>
+                            <mat-grid-tile>Discription</mat-grid-tile>
+                            <mat-grid-tile>Price</mat-grid-tile>
+                            <mat-grid-tile colspan="2">Actions</mat-grid-tile>
+                        </mat-grid-list>
+                        <cdk-virtual-scroll-viewport appendOnly itemSize="5" class="example-viewport">
+                        <mat-grid-list cols="14" *ngFor="let product of filteredProduct_list"
+                            style="margin-bottom: 15px;">
+                            <mat-grid-tile>{{product.productCode}}</mat-grid-tile>
+                            <mat-grid-tile>{{product.productCategory.categoryName}}</mat-grid-tile>
+                            <mat-grid-tile>{{product.productName}}</mat-grid-tile>
+                            <mat-grid-tile colspan="2"><mat-label>
+                                    <c-carousel [interval]="0" [dark]="true">
+                                        <c-carousel-indicators></c-carousel-indicators>
+                                        <c-carousel-inner>
+                                            <c-carousel-item *ngFor="let image of product.images">
+                                                <img [attr.width]="'150px'" [attr.height]="'150px'"
+                                                    [src]="image.image_url" class="d-block" loading="lazy" />
+                                            </c-carousel-item>
+                                        </c-carousel-inner>
+                                        <c-carousel-control [routerLink] caption="Previous"
+                                            direction="prev"></c-carousel-control>
+                                        <c-carousel-control [routerLink] caption="Next"
+                                            direction="next"></c-carousel-control>
+                                    </c-carousel>
+                                </mat-label></mat-grid-tile>
+                            <mat-grid-tile colspan="2">{{product.brand}}</mat-grid-tile>
+                            <mat-grid-tile colspan="2">{{product.mfgDate | date:'dd/MM/yyyy'}} |
+                                {{product.expDate | date:'dd/MM/yyyy'}}</mat-grid-tile>
+                            <mat-grid-tile>{{product.seller}}</mat-grid-tile>
+                            <mat-grid-tile>{{product.discription}}</mat-grid-tile>
+                            <mat-grid-tile>{{product.price}}</mat-grid-tile>
+                            <mat-grid-tile>
+
+                                <a mat-raised-button color="accent"
+                                    routerLink="/admin/product/{{product.productId}}">Edit</a>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <a mat-raised-button color="warn" (click)="deleteProduct(product.productId)"
+                                    routerLink="/admin/products">Delete</a>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

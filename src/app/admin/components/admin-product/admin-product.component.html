@@ -1,0 +1,108 @@
+<div class="app_card_container_addProduct">
+    <mat-card>
+        <mat-card-title>Product</mat-card-title>
+        <mat-card-subtitle>Add new product here!</mat-card-subtitle>
+        <mat-card-content>
+            <form [formGroup]="productForm">
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Code</mat-label>
+                    <input matInput type="text" formControlName="code" />
+                    <mat-error *ngIf="productForm.controls.code.hasError('required')">
+                        Please enter Product Code
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Category</mat-label>
+                    <mat-select formControlName="category">
+                        <mat-option *ngFor="let productCategory of productCategory_list"
+                            [value]="productCategory.productcategoryId">
+                            {{productCategory.categoryName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productForm.controls.category.hasError('required')">
+                        Please select Product Category
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Name</mat-label>
+                    <input matInput type="text" formControlName="name" />
+                    <mat-error *ngIf="productForm.controls.name.hasError('required')">
+                        Please enter product name.
+                    </mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Brand</mat-label>
+                    <input matInput type="text" formControlName="brand" />
+                    <mat-error *ngIf="productForm.controls.brand.hasError('required')">
+                        Please enter product brand.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Manufacturing Date</mat-label>
+                    <input matInput [matDatepicker]="mfgDatepicker" formControlName="mfgDate" (focus)="mfgDatepicker.open()" readonly />
+                    <mat-datepicker #mfgDatepicker></mat-datepicker>
+                    <mat-error *ngIf="productForm.controls.mfgDate.dirty && productForm.controls.mfgDate.hasError('required')">
+                        Please enter manufacturing date
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>expiery date</mat-label>
+                    <input matInput [matDatepicker]="expDatepicker" formControlName="expDate" (focus)="expDatepicker.open()" readonly/>
+                    <mat-datepicker #expDatepicker></mat-datepicker>
+                    <mat-error *ngIf="productForm.controls.expDate.dirty && productForm.controls.expDate.hasError('required')">
+                        Please enter expiery date.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Seller</mat-label>
+                    <input matInput type="text" formControlName="seller" />
+                    <mat-error *ngIf="productForm.controls.seller.hasError('required')">
+                        Please enter product seller.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Discription</mat-label>
+                    <input matInput type="text" formControlName="discription" />
+                    <mat-error *ngIf="productForm.controls.discription.hasError('required')">
+                        Please enter product discription.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="app_form_field auto">
+                    <mat-label>Product Price &#8377;</mat-label>
+                    <input matInput type="text" formControlName="price" />
+                    <mat-error *ngIf="productForm.controls.price.hasError('required')">
+                        Please enter product price.
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-label>Image</mat-label>
+                <div class="app_form_field auto">
+                    <input type="file" accept="image/*" formControlName="images" class="form-control"
+                        (change)="onImageChange($event)" multiple />
+                    <mat-grid-list cols="2">
+                        <mat-grid-tile *ngFor="let image of product.images; let i = index">
+                            <div class="card mt-2">
+                                <img [attr.width]="'150px'" [attr.height]="'150px'" [src]="image.image_url">
+                                <a style="text-align: center;" href="javascript:void(0);"
+                                    (click)="deleteImage(product.productId, i)"><mat-icon>delete</mat-icon></a>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </div>
+                <button mat-raised-button type="button" class="mr-8" color="primary" (click)="saveItem()"
+                    [disabled]="productForm.invalid">Save</button>
+
+                <a mat-raised-button color="accent" routerLink="/admin/products">Back</a>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
